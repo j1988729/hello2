@@ -8,7 +8,7 @@ for /f %%b in ('forfiles /M *.md') do ( set FILE_RC=%%b
 echo "hava file .md"aas
 )
 pause
-echo %FILE_RC%
+echo %FILE_RC%asdasd
 echo §Y±Ngit add©Mgit commit
 ::pause
 
