@@ -2,7 +2,7 @@
 ::¦C¥X.mdªºÀÉ®× 
 ::forfiles /P e:\412\testhook\ /M *.rc /c "cmd /c echo @file"
 ::chcp 65001
-::chcp 950
+::chcp 950asdasd
 for /f %%b in ('forfiles /M *.md') do ( set FILE_RC=%%b
 ::xcopy /y %cd%\*.rc %cd%\*.rcbak
 echo "hava file .md"aas
