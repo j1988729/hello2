@@ -5,7 +5,7 @@
 ::chcp 950
 for /f %%b in ('forfiles /M *.md') do ( set FILE_RC=%%b
 ::xcopy /y %cd%\*.rc %cd%\*.rcbak
-echo "hava file .md"
+echo "hava file .md"aas
 )
 pause
 echo %FILE_RC%
