@@ -1,5 +1,5 @@
 @ECHO OFF
-::列出.md的檔案 
+::列出.md的檔案 asdfa
 ::forfiles /P e:\412\testhook\ /M *.rc /c "cmd /c echo @file"
 ::chcp 65001
 ::chcp 950asdasd
