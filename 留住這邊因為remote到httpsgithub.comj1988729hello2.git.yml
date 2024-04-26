@@ -1,0 +1,41 @@
+build:
+  stage: build
+  # instead of calling g++ directly you can also use some build toolkit like make
+  # install the necessary build tools when needed
+  # before_script:
+  #   - apt update && apt -y install make autoconf
+  #順序應該為 先出.yml 決定only tags，再打tag push到remote 執行ci
+  #only:
+   #- 412_SNP_X86_20200905
+   # - 412_SNP_X86_20200910
+   #  message: #目前此行不可以用
+   #  - /\[runfullpipeline\]/
+  #可以使用CI/CD>JOB>CI lint 查看腳本是否正確
+  only: 
+    #- tags
+    variables: #commit message 如果是關鍵字 就會執行包版
+      - $CI_COMMIT_MESSAGE =~ /版號/
+      #CI_COMMIT_TAG 如果是有加入tag xxV, Vxx ,V (大寫) 就會執行包版  
+      #這邊variables 是 or的表達式，簡單說就是message和tag其中有達到條件就觸發
+      - $CI_COMMIT_TAG =~ /Version/ 
+      #- $CI_COMMIT_TAG =~ /^content.*/ #目前這邊還不確定用法
+    #changes: #可以執行 當只有這個檔案異動就包版的動作
+    #  - "*.rc"
+  tags: #相對應 runner的tag
+    - RELEASE
+  script:
+    - echo $env:GREETING
+    - echo $env:CI_JOB_ID
+    - echo $env:CI_COMMIT_TAG
+    - echo $env:CI_COMMIT_SHA
+    - echo $env:CI_COMMIT_MESSAGE
+    - echo $env:CI_COMMIT_TITLE
+    - echo $env:CI_COMMIT_REF_NAME
+    #- export #目前沒有用
+    - ./_build_echo.bat
+  artifacts:
+    paths: #相對應程式產生的 產品資料夾 需要注意大小寫
+      - Output_Uat
+
+
+
