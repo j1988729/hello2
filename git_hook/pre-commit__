@@ -1,0 +1,24 @@
+#!/bin/sh
+echo "!! test"
+sRoot=`git rev-parse --show-toplevel`
+sConfigFile=$sRoot/.git/config
+
+# 讀 .git/config　是否有gitflow section, 有啟用git flow才要檢查不能在master commit
+sBranch=`git config gitflow.branch.develop`
+
+# echo root=$sRoot, branch=$sBranch
+
+if [ "$sBranch" == "" ]; then
+  exit 0
+fi
+
+branch="$(git symbolic-ref --short HEAD)"
+echo "目前的分支是 ${branch}"
+if [ "$branch" = "master" ] || [ "$branch" = "develop" ]
+then
+  echo "!! 儲存庫已啟用 Git Flow，commit失敗 !!"
+  echo "!! 不可直接commit到 ${branch} 分支"
+  echo "!! 還原：點擊新增或修改的檔案後按Unstage，再Start Feature"
+  exit 1
+fi
+exit 0

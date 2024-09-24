@@ -1,0 +1,21 @@
+#!/bin/bash
+echo "!!this bbbbb"
+rev=$1
+
+if [ "$rev" == "" ]
+then
+    echo "Missing revision parameter." >&2
+    exit 1
+fi
+
+tmpdir=/tmp/$$.extract_project_version
+
+mkdir -p $tmpdir
+git archive $rev | tar -x -C $tmpdir
+
+if [ -e "$tmpdir/project.info" ]
+then
+    echo $tmpdir/project.info
+fi
+
+rm -rf $tmpdir
